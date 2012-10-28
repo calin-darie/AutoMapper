@@ -17,7 +17,7 @@ namespace AutoMapper.UnitTests.Bug
             public int? Value2 { get; set; }
         }
 
-        public class When_conditionally_skipping_null_destination_values : AutoMapperSpecBase
+        public class When_conditionally_mapping_only_to_null_destination_values : AutoMapperSpecBase
         {
             private FooDto _destination;
 
