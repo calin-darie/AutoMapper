@@ -23,10 +23,10 @@ namespace AutoMapper.Mappers
 			Type destElementType = TypeHelper.GetElementType(context.DestinationType);
 
 			var sourceLength = enumerableValue.Count;
-			var destination = (context.DestinationValue == null 
-                || ( context.DestinationType.IsArray && context.SourceValue != null))?  
-                CreateDestinationObject(context, destElementType, sourceLength, mapper)
-                :
+            bool shouldCreateNewObject = ShouldCreateNewObject(context);
+			var destination =  shouldCreateNewObject ? 
+                CreateDestinationObject(context, destElementType, sourceLength, mapper) 
+                : 
                 context.DestinationValue;
 			var enumerable = GetEnumerableFor(destination);
 
@@ -55,6 +55,13 @@ namespace AutoMapper.Mappers
 			object valueToAssign = destination;
 			return valueToAssign;
 		}
+
+        protected virtual bool ShouldCreateNewObject(ResolutionContext context)
+        {
+            var result = context.DestinationValue == null;
+               
+            return result;
+        }
 
 
 		protected virtual TEnumerable GetEnumerableFor(object destination)

@@ -23,5 +23,12 @@ namespace AutoMapper.Mappers
 		{
 			return ObjectCreator.CreateArray(destElementType, sourceLength);
 		}
+
+
+        protected override bool ShouldCreateNewObject(ResolutionContext context)
+        {
+            bool result = (context.DestinationValue == null || context.SourceValue != null);
+            return result;
+        }
 	}
 }

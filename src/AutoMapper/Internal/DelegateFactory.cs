@@ -61,7 +61,7 @@ namespace AutoMapper
 		public static LateBoundPropertyGet CreateGet(PropertyInfo property)
 		{
 			ParameterExpression instanceParameter = Expression.Parameter(typeof(object), "target");
-
+            
 			MemberExpression member = Expression.Property(Expression.Convert(instanceParameter, property.DeclaringType), property);
 
 			Expression<LateBoundPropertyGet> lambda = Expression.Lambda<LateBoundPropertyGet>(
